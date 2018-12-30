@@ -15,8 +15,11 @@ class socketPub():
     def __exit__(self, type, value, traceback):
         pass
         self.socket.close()
-    def publish(self,string):  
-        self.socket.send(string)
+    def publish(self,element, type="pyobj"):  
+        if type == "pyobj":
+            self.socket.send_pyobj(element)
+        if type == "bytes":
+            self.socket.send(element)
 class socketSub():
     def __init__(self, targets):#targets means[(host1, port1), (host2, port2)], for multi-publish
         self.context = zmq.Context()
@@ -33,10 +36,13 @@ class socketSub():
         for socket in self.sockets:
             socket.close()
 
-    def subscribe(self,times=sys.maxsize):
+    def subscribe(self,type="pyobj",times=sys.maxsize):
         for i in range(times):
             res = []
             for socket in self.sockets:
-                string = socket.recv()
-                res.append(string)
+                if type == "pyobj":
+                    element = socket.recv_pyobj()
+                if type == "bytes":
+                    element = socket.recv()
+                res.append(element)
             yield res
