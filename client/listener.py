@@ -5,4 +5,4 @@ SERVER_PORT = 50000
 with socketSub([(SERVER_HOST, SERVER_PORT)]) as sub:
     for recvs in sub.subscribe(type="pyobj"):
         print("recv:",recvs[0])
-        wati_time(recvs[0]["time"])
+        wait_time(recvs[0]["time"])
