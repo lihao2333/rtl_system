@@ -12,4 +12,3 @@ def wait_time(time):
                  print(now)
                  if  time == now:
                      break
-wait_time("162630")
