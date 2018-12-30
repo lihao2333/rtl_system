@@ -13,6 +13,7 @@ while True:
     my_sdr.set_paras(recv["params"])
     wait_time(recv["time"])
     data = my_sdr.sample_data()
-    socket.send_pyobj(data)
+    recv["data"] = data
+    socket.send_pyobj(recv)
     print(data)
 
