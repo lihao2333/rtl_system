@@ -10,7 +10,7 @@ class MySdr():
         self.sdr.gain = paras.setdefault("gain","")
         self.sample_num = paras.setdefault("sample_num",0)
     def sample_data():
-        self.sdr.read_samples(self.sample_num)
+        return self.sdr.read_samples(self.sample_num)
 
 '''
 sdr = RtlSdr()
