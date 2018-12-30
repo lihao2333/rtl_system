@@ -1,6 +1,7 @@
 from SocketBox.socketSP import socketPub
 import datetime
 import time
+import zmq
 HOST = "0.0.0.0"
 PORT = 50000
 DELAY_SECOND = 5
@@ -17,6 +18,10 @@ TO_SEND = {
             "sample_num":512
             }
         }
-with socketPub(HOST, PORT) as pub:
-    pub.publish(TO_SEND, type="pyobj")
-
+PORT = "50000"
+context = zmq.Context()
+socket = context.socket(zmq.REQ)
+socket.connect('tcp://10.112.216.60:%s'%PORT)
+socket.send_pyobj(TO_SEND)
+data = socket.recv_pyobj()
+print(data)
