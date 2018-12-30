@@ -6,7 +6,6 @@ class MySdr():
     def set_paras(self,paras):
         self.sdr.sample_rate = paras.setdefault("sample_rate","")
         self.sdr.center_freq = paras.setdefault("center_freq","")
-        self.sdr.freq_correction = paras.setdefault("freq_correction","")
         self.sdr.gain = paras.setdefault("gain","")
         self.sample_num = paras.setdefault("sample_num",0)
     def sample_data(self):
